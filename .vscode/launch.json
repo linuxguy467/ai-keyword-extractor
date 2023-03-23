@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "Vite Dev Server",
+      "request": "launch",
+      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    }
+  ]
+}
