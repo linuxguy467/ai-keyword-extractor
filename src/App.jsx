@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Box, Container } from '@chakra-ui/react'
-import { Footer, Header, TextInput } from './components'
+import { Footer, Header, KeywordsModal, TextInput } from './components'
 
 const App = () => {
   const [keywords, setKeywords] = useState('')
@@ -22,7 +22,9 @@ const App = () => {
         prompt: 'Extract keywords from this text. Make the first letter of each word uppercase and seperate with commas\n\n' + text + '',
         temperature: 0.5,
         max_tokens: 60,
+        top_p: 1.0,
         frequency_penalty: 0.8,
+        presence_penalty: 0.0,
       }),
     }
 
@@ -32,7 +34,12 @@ const App = () => {
 
     const data = json.choices[0].text.trim()
 
-    console.log(data)
+    setKeywords(data)
+    setLoading(false)
+  }
+
+  const closeModal = () => {
+    setIsOpen(false)
   }
 
   return (
@@ -42,6 +49,7 @@ const App = () => {
         <TextInput extractKeywords={extractKeywords} />
         <Footer />
       </Container>
+      <KeywordsModal keywords={keywords} loading={loading} isOpen={isOpen} closeModal={closeModal} />
     </Box>
   )
 }
